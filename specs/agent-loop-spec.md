@@ -9,7 +9,7 @@
 
 Orchestrate a single conversational turn for the Plant Advisor agent. Given a user message and the conversation history, call the LLM with available tools, execute any tool calls the LLM requests, and return the final text response.
 
-This is the core of what makes Plant Advisor an *agent* rather than a simple chatbot: the ability to decide which tools to call, use their results to inform its response, and loop until it has everything it needs.
+This is the core of what makes Plant Advisor an _agent_ rather than a simple chatbot: the ability to decide which tools to call, use their results to inform its response, and loop until it has everything it needs.
 
 ---
 
@@ -17,10 +17,10 @@ This is the core of what makes Plant Advisor an *agent* rather than a simple cha
 
 **Inputs:**
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `user_message` | `str` | The user's current message |
-| `history` | `list` | Gradio conversation history — list of `[user_msg, assistant_msg]` pairs |
+| Parameter      | Type   | Description                                                             |
+| -------------- | ------ | ----------------------------------------------------------------------- |
+| `user_message` | `str`  | The user's current message                                              |
+| `history`      | `list` | Gradio conversation history — list of `[user_msg, assistant_msg]` pairs |
 
 **Output:** `str`
 
@@ -30,7 +30,7 @@ The agent's final text response for this turn. Should never be empty — if some
 
 ## Design Decisions
 
-*Read `specs/system-design.md` (especially the "How the Groq Tool Calling API Works" section) before reviewing these. Complete the two blank fields before writing any code.*
+_Read `specs/system-design.md` (especially the "How the Groq Tool Calling API Works" section) before reviewing these. Complete the two blank fields before writing any code._
 
 ---
 
@@ -119,17 +119,20 @@ for tool_call in assistant_message.tool_calls:
 
 ### Loop termination conditions
 
-*The loop should stop when: (a) the LLM returns a response with no tool calls, OR (b) the MAX_TOOL_ROUNDS limit is reached. Describe how you will detect each condition and what you will return in each case.*
+_The loop should stop when: (a) the LLM returns a response with no tool calls, OR (b) the MAX_TOOL_ROUNDS limit is reached. Describe how you will detect each condition and what you will return in each case._
+TODO here, Milestone 1 finished?
 
 ```
-[your answer here]
+(a) `if not assistant_message.tool_calls` - return that there are no tool calls
+
+(b) Use for loop that runs for MAX_TOOL_ROUNDS iters - once exhausted return msg saying limit reached
 ```
 
 ---
 
 ### Extracting the final text response
 
-*Once the loop exits because there are no more tool calls, how do you extract the text content from the response object? What field holds the string you should return?*
+_Once the loop exits because there are no more tool calls, how do you extract the text content from the response object? What field holds the string you should return?_
 
 ```
 [your answer here]
@@ -139,7 +142,7 @@ for tool_call in assistant_message.tool_calls:
 
 ## Implementation Notes
 
-*Fill this in after implementing and testing.*
+_Fill this in after implementing and testing._
 
 **Trace of a working agent turn (what tools were called and in what order):**
 

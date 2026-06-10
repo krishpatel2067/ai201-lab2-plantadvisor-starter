@@ -13,10 +13,18 @@ with open(os.path.join(DATA_PATH, "seasons.json"), encoding="utf-8") as f:
 
 # Maps calendar months to seasons for auto-detection.
 _MONTH_TO_SEASON = {
-    12: "winter", 1: "winter", 2: "winter",
-    3: "spring", 4: "spring", 5: "spring",
-    6: "summer", 7: "summer", 8: "summer",
-    9: "fall",  10: "fall",  11: "fall",
+    12: "winter",
+    1: "winter",
+    2: "winter",
+    3: "spring",
+    4: "spring",
+    5: "spring",
+    6: "summer",
+    7: "summer",
+    8: "summer",
+    9: "fall",
+    10: "fall",
+    11: "fall",
 }
 
 
@@ -52,6 +60,23 @@ def lookup_plant(plant_name: str) -> dict:
 
     Before writing code, complete the lookup_plant section of specs/tool-functions-spec.md.
     """
+
+    normalized = plant_name.strip().lower()
+
+    # 1. search keys
+    if normalized in _plant_db:
+        return {"found": True, "plant": _plant_db[normalized]}
+
+    # 2. search display names
+    for plant in _plant_db.values():
+        if plant["display_name"].lower() == normalized:
+            return {"found": True, "plant": plant}
+
+    # 3. search aliases
+    for plant in _plant_db.values():
+        if normalized in [alias.lower() for alias in plant["aliases"]]:
+            return {"found": True, "plant": plant}
+
     return {
         "found": False,
         "name": plant_name,
