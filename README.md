@@ -1,6 +1,7 @@
 # Plant Advisor — AI201 Lab 2
 
 **_CodePath AI201: Applications of AI Engineering (Summer 2026)_**
+
 _Krish A. Patel_
 
 A conversational agent that helps users care for their houseplants. Ask it anything about a plant in its database and it will look up the care requirements, check the current seasonal context, and give you specific, grounded advice.
