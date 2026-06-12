@@ -215,7 +215,7 @@ def run_agent(user_message: str, history: list) -> str:
     while (res_msg := res.choices[0].message).tool_calls and (
         i := i + 1
     ) <= MAX_TOOL_ROUNDS:
-        print(f"{i=}")
+        print(f"{i=} out of max {MAX_TOOL_ROUNDS}")
         # a. Append assistant message *before* any tool calls
         msgs.append(res_msg)
 
